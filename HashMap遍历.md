@@ -175,7 +175,98 @@ private static Map< Object,Objec t> getMap() {...}
 >
 > 2.只获取value：map.values().iterator()
 
+##### 拓展：
 
+单Map中value不在单一属性、及出现list集合或者set集合时
+
+对value的遍历时，则需添加一步对list/set集合遍历
+
+example1：keySet
+
+```
+	@Test
+	public void testValeList() {
+		Map<String, int[]> map = new HashMap<>();
+		map.put("1", new int[] { 4, 5 });
+		map.put("2", new int[] { 1, 2, 3 });
+		map.put("3", new int[] { 6, 7, 8, 9 });
+		
+		for (Object obj : map.keySet()) {
+			 System.out.println(obj+" " +map.get(obj)); 
+		}
+	}
+```
+
+```
+运行结果：
+1 [I@137e0d2
+2 [I@59eb14
+3 [I@2e4553
+```
+
+example2：keySet
+
+```
+	@Test
+	public void testValeList() {
+		Map<String, int[]> map = new HashMap<>();
+		map.put("1", new int[] { 4, 5 });
+		map.put("2", new int[] { 1, 2, 3 });
+		map.put("3", new int[] { 6, 7, 8, 9 });
+
+		// keySet、并对value进行遍历
+		for (Object obj : map.keySet()) {
+			for (int i = 0; i < map.get(obj).length; i++) {
+				 System.out.println(obj+" " +map.get(obj)[i]);
+			}
+		}
+	}
+```
+
+```
+运行结果：
+1 4
+1 5
+2 1
+2 2
+2 3
+3 6
+3 7
+3 8
+3 9
+```
+
+example3：entrySet
+
+```
+		@Test
+	public void testValeList() {
+		Map<String, int[]> map = new HashMap<>();
+		map.put("1", new int[] { 4, 5 });
+		map.put("2", new int[] { 1, 2, 3 });
+		map.put("3", new int[] { 6, 7, 8, 9 });
+		
+		for (Map.Entry<String, int[]> my : map.entrySet()) {
+			System.out.println("entrySet:");
+			// System.out.println(my);//键值映射
+			int[] a = my.getValue();
+			for (int i = 0; i < a.length; i++) {
+				System.out.print(a[i] + " ");
+			}
+			System.out.println("\t");
+		}
+	}
+```
+
+```
+运行结果：
+entrySet:
+4 5 	
+entrySet:
+1 2 3 	
+entrySet:
+6 7 8 9 
+```
 
 程序源代码：
 
