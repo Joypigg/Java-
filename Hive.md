@@ -10,7 +10,7 @@ JDK安装、Hadoop安装
 2. bin/hive   启动即可
 3. 缺点：不同路径启动hive，每个hive拥有一套自己的元数据，无法共享
 
-- [ ] ## mysql版 
+- [x] ## mysql版 
 
 1. 安装mysql
 
@@ -122,3 +122,26 @@ JDK安装、Hadoop安装
       > hive  -e   'sql'
       >
       > bin/hive  -e  'select * from t_test'
+
+## Apach  Hive
+
+[数据仓库软件](http://hive.apache.org/)，使大数据的读写和管理容易。
+
+- 通过sql访问数据库的工具
+- extract、transform、load、reporting、data analysis
+- 强加的一种数据格式
+- Query执行是[Tez](http://tez.apache.org/)、[Spark](http://spark.apache.org/)、[MapReduce](http://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html)
+- 程序上的语言使用HPL-SQL
+- 子查询使用 [Hive LLAP](https://cwiki.apache.org/confluence/display/Hive/LLAP), [Apache YARN](https://hadoop.apache.org/docs/r2.7.2/hadoop-yarn/hadoop-yarn-site/YARN.html) and [Apache Slider](https://slider.incubator.apache.org/)
+- 支持原始的数据格式操作，还支持用户自定义的数据格式 [File Formats](https://cwiki.apache.org/confluence/display/Hive/DeveloperGuide#DeveloperGuide-FileFormats)、[Hive SerDe](https://cwiki.apache.org/confluence/display/Hive/DeveloperGuide#DeveloperGuide-HiveSerDe) 
+- 并不是支持联网的事物处理，而是被设计用来进行高扩展、高性能、高容错和松耦合
+
+### 组成
+
+1. [**HCatalog**](https://cwiki.apache.org/confluence/display/Hive/HCatalog)
+
+      是Hadoop的一个表和存储管理层，诸如Pig、MapReduce
+
+2. [**WebHCat**](https://cwiki.apache.org/confluence/display/Hive/WebHCat)
+
+      提供http接口服务，使用此服务可以使用正在运作的Hadoop MapReduce (or YARN), Pig, Hive jobs 或者执行Hive的元数据操作 
